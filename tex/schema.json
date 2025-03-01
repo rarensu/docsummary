@@ -52,7 +52,7 @@
                         "type": "string",
                         "description": "A string representing the end of the document element for pattern matching. Must contain at least 3 characters.",
                         "minLength": 3
-                    }
+                    },
                     "parent": {
                         "type": "string",
                         "description": "The label of the parent document element. Cannot contain newlines.",
