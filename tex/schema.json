@@ -9,12 +9,12 @@
             "description": "The agent's self-reported acknowledgement of understanding and acceptance or rejection of the instructions.",
             "type": "string"
         },
-        "document_name": {
-            "description": "The name of the document being summarized.",
+        "filename": {
+            "description": "The name of the file being summarized.",
             "type": "string"
         },
-        "contents": {
-            "description": "An itemized list of summaries from the document, representing a hierarchical structure.",
+        "tree": {
+            "description": "An itemized list of document elements, representing a hierarchical structure (tree/node/leaf).",
             "type": "array",
             "items": {
                 "type": "object",
@@ -70,9 +70,17 @@
                         "type": "string",
                         "description": "The title of the document element."
                     },
-                    "summary": {
+                    "node_content": {
+                       "type": "string",
+                        "description": "Raw extracted text of the document element, not including its children."                    
+                    },
+                    "node_summary": {
                         "type": "string",
-                        "description": "A brief summary of the document element."
+                        "description": "A brief summary of the document element, not including its children."
+                    },
+                    "tree_summary": {
+                        "type": "string",
+                        "description": "A brief summary of the document element, including its children, recursively."
                     },
                     "keywords": {
                         "type": "array",
