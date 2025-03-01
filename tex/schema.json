@@ -1,10 +1,14 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/rarensu/docsummary/v1.0/tex/schema.json",
-    "title": "Richard's custom document summary schema (v1.0)",
+    "$id": "https://raw.githubusercontent.com/rarensu/docsummary/v1.1/tex/schema.json",
+    "title": "Richard's custom document summary schema (v1.1)",
     "description": "JSON schema for organizing summaries of a long latex document with a hierarchical structure.",
     "type": "object",
     "properties": {
+        "response": {
+            "description": "The agent's self-reported acknowledgement of understanding and acceptance or rejection of the instructions.",
+            "type": "string"
+        }
         "document_name": {
             "description": "The name of the document being summarized.",
             "type": "string"
@@ -36,12 +40,22 @@
                     },
                     "label": {
                         "type": "string",
-                        "description": "A unique label for the document element (used with \\label{}).  Cannot contain spaces.",
+                        "description": "A unique label for the document element (used with \\label{}).  Cannot contain newlines.",
                         "pattern": "^[^\\n]+$"
                     },
+                    "starts_with": {
+                        "type": "string",
+                        "description": "A string representing the beginning of the document element for pattern matching. Must contain at least 3 characters.",
+                        "minLength": 3
+                    },
+                    "ends_with": {
+                        "type": "string",
+                        "description": "A string representing the end of the document element for pattern matching. Must contain at least 3 characters.",
+                        "minLength": 3
+                    }
                     "parent": {
                         "type": "string",
-                        "description": "The label of the parent document element. Cannot contain spaces.",
+                        "description": "The label of the parent document element. Cannot contain newlines.",
                         "pattern": "^[^\\n]+$"
                     },
                     "children": {
@@ -75,44 +89,18 @@
                 "required": [
                     "label",
                     "prefix"
-                ],
-                "oneOf": [
-                    {
-                        "required": [
-                            "title"
-                        ]
-                    },
-                    {
-                        "required": [
-                            "summary"
-                        ]
-                    },
-                    {
-                        "required": [
-                            "keywords"
-                        ]
-                    },
-                    {
-                        "required": [
-                            "comment"
-                        ]
-                    }
                 ]
             }
         },
-        "response_status": {
+        "status": {
             "description": "The agent's self-reported success or failure in summarizing the document.",
-            "type": "string",
-            "enum": [
-                "success",
-                "failure",
-                "partial_success"
-            ]
+            "type": "string"
         }
     },
     "required": [
+        "response",
         "document_name",
         "contents",
-        "response_status"
+        "status"
     ]
 }
