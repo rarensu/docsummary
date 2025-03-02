@@ -1,24 +1,34 @@
 **Task: Populate "starts_with", "ends_with", and "title"**
 This prompt corresponds to Step 2 of the multi-step workflow described in the system prompt.
 
-In your preparation phase: 
-1: compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label. 
-2: make a list of expected delimiters for the document elements in this chunk. For example, \section and \begin{figure}. Not all possible document element types will appear in every chunk. 
-3: pick one label to serve as your test case. Choose strings to mark the beginning and ending of that labeled document element. Verify that the strings are unique in this chunk. Ideally, they should contain text that is specific enough to most likely not appear in any other document chunk. For example:
+In your preparation phase:
+1: compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label.
+2: make a list of expected delimiters for the document elements in this chunk. For example, \section and \begin{figure}. Not all possible document element types will appear in every chunk.
+3: pick one label to serve as your test case. Choose strings to mark the beginning and ending of that labeled document element. Aim to choose the shortest possible strings that are still unique in this chunk. Verify that the strings are unique in this chunk. Ideally, they should contain text that is specific enough to most likely not appear in any other document chunk. For example:
 {
 "prefix": "Section",
 "label":"section:foo",
 "starts_with": "\section{The Amazing Foo}\label{section:foo}\n",
-"ends_with": "In the next section, we discuss a different topic named Bar.\n"
+"ends_with": "% end of section \label{section:foo}\n"
 }
 
-Suggestions for choosing good quality "starts_with", "ends_with" values:
-- LaTeX commands: When possible, include LaTeX commands (like \section{, \label{, \begin{figure}) in your string. 
-- Unique text: When possible, include part of the title or heading in your string.
-- Newline characters: Often, document elements start and end with newline characters (\n). Including these in your "starts_with" and "ends_with" strings can improve accuracy.
-- Contextual keywords: For "ends_with", look for phrases that signal the end of a section or element, such as "In the next section,".
-- If uniqueness is difficult: you may need to include more surrounding text in your "starts_with" and "ends_with" strings to ensure uniqueness within the chunk, even if it causes the string to cross the boundary into a neighboring document element or a parent document element. For example, since the latex delimeter of a footnote is entirely generic (\footnote{}), this will practically always be necessary for footnotes.
+*Suggestions for locating the start and end of a document element*:
+- Standard latex commands: Most document element types correspond to a standard latex command to delimit their starting point. E.g., \section, \begin{figure} \footnote. Usually, the nearest such delimiter that preceeds a \label command is the beginning of the element.
+- Custom end delimiters: I have populated the chunk with custom end delimiters to help you find the ends of section-like elements. The template for these custom delimiters is: "% end of <prefix_lowercase> \label{<label>}". For example: "% end of subsection \label{section:intro-quantum}".
+- Finding accurate "ends_with" values can be challenging if an explicit delimiter is not present. In that case, prioritize the following, in order of preference:
+    1. Start of the next section at the same or higher level: Look for the beginning delimiter of the *next* section command (\section{, \chapter{, \part{ etc.) that appears *after* the current document element in the chunk.  This is often the most reliable marker for the end of the current section's content (if custom delimiters are not available). For example, if you are defining "ends_with" for a \subsection, look for the next \subsection{, \section{, \chapter{, or \part{.
+    2. Start of a new environment:  Look for the beginning delimiter of a new LaTeX environment (\begin{figure}, \begin{table}, \begin{equation}, etc.) that appears after the current document element.  Environments often begin a new block of content after a section.
+    3. Contextual keywords and transition phrases: Look for short phrases that signal the transition to a new topic or the end of the current section, such as "In the next section,", "Subsequently,", "In conclusion,", "Finally,". These can be helpful, but are less reliable than custom delimiters or section/environment delimiters.
+    4. End of the current chunk: If none of the above delimiters or phrases are found *within the current chunk after the "starts_with" string*, then the "ends_with" string might simply be the end of the chunk itself.  This indicates that the current document element extends to the end of the provided text chunk.
 
-This paragraph clarifies the "title" field. Some latex document elements have an obvious title. For example, \section{title}. For latex elements that have a \caption, pick a fragment of the first sentence from the caption, but exclude any boilerplate (This figure shows). For example, "A diagram of a device with a sensor." For other elements, just pick a few words from near the start of the element, but exclude any boilerplate (In this paragraph, we). For example, "describe the components of the device." The title field is just a convenience, and does not need to be supremely accurate. It's OK to paraphrase or otherwise use judgement to make the title look cleaner. 
+*Suggestions for choosing good quality "starts_with", "ends_with" values*:
+- Custom End Delimiters: When possible, include a custom end delimiter (% end of ...) in the "ends_with" string, if it is present in the chunk.
+- LaTeX commands: Prioritize including LaTeX commands (like \section{, \label{, \begin{figure}) in your string. These are often excellent and concise delimiters, especially for "starts_with" strings.
+- Unique text: When possible, include a short, unique fragment of the title or heading in your string. Focus on the most distinctive words.
+- Newline characters: Often, document elements start and end with newline characters (\n). Including these in your "starts_with" and "ends_with" strings can improve accuracy and conciseness.
+- If uniqueness is difficult: you may need to include more surrounding text in your "starts_with" and "ends_with" strings to ensure uniqueness within the chunk. It is OK if the strings slightly overlap with neighboring elements or parent elements. They only need to approximately mark the position of the element.
+- Strive to keep the strings as short as possible while maintaining uniqueness and accuracy.
 
-In your response, output an updated data structure that includes "starts_with", "ends_with", and "title" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
+This paragraph clarifies the "title" field. Some latex document elements have an obvious title. For example, \section{title}. For latex elements that have a \caption, pick a fragment of the first sentence from the caption, but exclude any boilerplate (This figure shows). For example, "A diagram of a device with a sensor." For other elements, just pick a few words from near the start of the element, but exclude any boilerplate (In this paragraph, we). For example, "describe the components of the device." The title field is just a convenience, and does not need to be supremely accurate. It's OK to paraphrase or otherwise use judgement to make the title look cleaner.
+
+In your response, output an updated data structure that includes "starts_with", "ends_with", and "title" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate.
