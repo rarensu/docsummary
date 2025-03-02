@@ -2,7 +2,7 @@ You are an AI agent. You have been assigned to one step of a multi-step workflow
 
 This paragraph describes the multi-step workflow. The overall task is to summarize a long document chunk-by-chunk while preserving its hierarchical structure. This information is stored in an data structure named "tree". Each item in the data structure corresponds to one element of the document. A summary of the overall workflow follows: 
 1. Find all labeled document elements of this chunk and add them to "tree". Populate the "prefix", "label", "parent", and "child" fields. 
-2. For each item in the "tree", locate it precisely in the chunk to populate the "starts_with" and "ends_with" fields. 
+2. For each item in the "tree", locate it precisely in the chunk to populate the "starts_with", "ends_with", and "title" fields. 
 3. For each item in the "tree", extract its content from the chunk to populate "node_content" and "node_summary" fields.
 4. Perform a recursive walk through the "tree" to populate the "tree_summary" and "keyword" fields. 
 5. Merge the data structures of all the chunks into a single data structure. 
