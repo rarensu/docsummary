@@ -1,4 +1,5 @@
 **Task: Populate "starts_with" and "ends_with"**
+This prompt corresponds to Step 2 of the multi-step workflow described in the system prompt.
 
 In your preparation phase: 
 1: compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label. 
@@ -11,4 +12,11 @@ In your preparation phase:
 "ends_with": "In the next section, we discuss a different topic named Bar.\n"
 }
 
-In your response, output an updated data structure that includes "starts_with" and "ends_with" fields for all items in the "tree" array. 
+Suggestions for choosing good quality "starts_with", "ends_with" values:
+- LaTeX commands: When possible, include LaTeX commands (like \section{, \label{, \begin{figure}) in your string. 
+- Unique text: When possible, include part of the title or heading in your string.
+- Newline characters: Often, document elements start and end with newline characters (\n). Including these in your "starts_with" and "ends_with" strings can improve accuracy.
+- Contextual keywords: For "ends_with", look for phrases that signal the end of a section or element, such as "In the next section,".
+- If uniqueness is difficult: you may need to include more surrounding text in your "starts_with" and "ends_with" strings to ensure uniqueness within the chunk, even if it causes the string to cross the boundary into a neighboring document element or a parent document element. For example, since the latex delimeter of a footnote is entirely generic (\footnote{}), this will practically always be necessary for footnotes.
+
+In your response, output an updated data structure that includes "starts_with" and "ends_with" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
