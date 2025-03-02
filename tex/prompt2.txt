@@ -22,7 +22,7 @@ In your preparation phase:
 },
 ]
 }
-3: The idea is to extract the document element's content while skipping over the content of the child elements. This is defined to be the "node_content" for the test item. Verify that the concatenation of the intervals described below correctly extracts the "node_content" of the test item and excludes the test item's children. To clarify, since the "starts_with" and "ends_with" strings only *approximately* mark the positions of of a child element, you will have to use judgement about which characters from the string to include/exclude from "node_content". 
+3: The idea is to extract the document element's content while skipping over the content of the child elements. This is defined to be the "node_content" for the test item. Verify that the concatenation of the intervals described below correctly extracts the "node_content" of the test item and excludes the test item's children. To clarify, since the "starts_with" and "ends_with" strings only *approximately* mark the positions of of a child element, you will have to use judgement about which characters from the string to include/exclude from "node_content". If the formula described below doesn't work for you, you might choose to define a new formula. 
 // interval before first child
 (item["starts_with"], item["child_boundaries"][0]["starts_with"]) +
 // interval between first and second child
@@ -32,6 +32,7 @@ In your preparation phase:
 // interval after last child
 (item["child_boundaries"][n-1]["ends_with"], item["ends_with"]) 
 
+Also in your preparation phase: 
 4. Summarize "node_content" for your test item, briefly, omitting redundant statements and references to other elements. This is defined to be "node_summary". 
 
 In your response, output an updated data structure that includes "node_content" and "node summary" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "start_with", "ends_with", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
