@@ -1,0 +1,14 @@
+**Task: Populate "starts_with" and "ends_with"**
+
+In your preparation phase: 
+1: compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label. 
+2: make a list of expected delimiters for the document elements in this chunk. For example, \section and \begin{figure}. Not all possible document element types will appear in every chunk. 
+3: pick one label to serve as your test case. Choose strings to mark the beginning and ending of that labeled document element. Verify that the strings are unique in this chunk. Ideally, they should contain text that is specific enough to most likely not appear in any other document chunk. For example:
+{
+"prefix": "Section",
+"label":"section:foo",
+"starts_with": "\section{The Amazing Foo}\label{section:foo}\n",
+"ends_with": "In the next section, we discuss a different topic named Bar.\n"
+}
+
+In your response, output an updated data structure that includes "starts_with" and "ends_with" fields for all items in the "tree" array. 
