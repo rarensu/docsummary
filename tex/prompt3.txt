@@ -1,0 +1,31 @@
+**Task: Populate 'tree_summary' (Recursive Walk)**
+
+In your preparation phase, 
+1: Compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label.  
+2: Identify a "leaf" node, which is an item that has no children. Find its parent and its siblings (other children of the same parent). 
+For example:
+{
+// test item
+"label":"section:foo_motivation"
+"parent":"section:foo"
+"children":[] // or, field is missing. 
+},
+{
+// parent
+"label":"section:foo"
+"children":[
+"section:foo_motivation",
+"section:foo_experiment"
+]
+},
+{
+// sibling
+"label":"section:foo_experiment"
+"parent":"section:foo"
+"children":[] // or, field is missing. 
+},
+4. Verify that the test parent item and its children have a "node_summary". Summarize all of them together, briefly, omitting redundant statements. This is defined to be the "tree_summary" of the parent item. 
+
+If an item is a grandparent (its children have children), then instead you would use the "tree_summary" of its children rather than the "node_summary" of its children. For this reason, it is most efficient to process the tree from the bottom-up. However, in the inputXY.json, the elements are most likely in top-town order, which is approximately the reverse order of the desired output. The root item, with prefix "Document", will be the last item to get a "tree_summary" and therefore be the last item in the output data structure.
+
+In your response, output an updated data structure in bottom-up order (children before parents) that includes a "tree summary" for each non-leaf item and a "keyword" field for each item (whether leaf or non-leaf). 
