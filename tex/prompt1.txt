@@ -1,4 +1,4 @@
-**Task: Populate "starts_with" and "ends_with"**
+**Task: Populate "starts_with", "ends_with", and "title"**
 This prompt corresponds to Step 2 of the multi-step workflow described in the system prompt.
 
 In your preparation phase: 
@@ -19,4 +19,6 @@ Suggestions for choosing good quality "starts_with", "ends_with" values:
 - Contextual keywords: For "ends_with", look for phrases that signal the end of a section or element, such as "In the next section,".
 - If uniqueness is difficult: you may need to include more surrounding text in your "starts_with" and "ends_with" strings to ensure uniqueness within the chunk, even if it causes the string to cross the boundary into a neighboring document element or a parent document element. For example, since the latex delimeter of a footnote is entirely generic (\footnote{}), this will practically always be necessary for footnotes.
 
-In your response, output an updated data structure that includes "starts_with" and "ends_with" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
+This paragraph clarifies the "title" field. Some latex document elements have an obvious title. For example, \section{title}. For latex elements that have a \caption, pick a fragment of the first sentence from the caption, but exclude any boilerplate (This figure shows). For example, "A diagram of a device with a sensor." For other elements, just pick a few words from near the start of the element, but exclude any boilerplate (In this paragraph, we). For example, "describe the components of the device." The title field is just a convenience, and does not need to be supremely accurate. It's OK to paraphrase or otherwise use judgement to make the title look cleaner. 
+
+In your response, output an updated data structure that includes "starts_with", "ends_with", and "title" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
