@@ -35,4 +35,4 @@ In your preparation phase:
 Also in your preparation phase: 
 4. Summarize "node_content" for your test item, briefly, omitting redundant statements and references to other elements. This is defined to be "node_summary". 
 
-In your response, output an updated data structure that includes "node_content" and "node summary" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "start_with", "ends_with", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
+In your response, output an updated data structure that includes "node_content" and "node summary" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "start_with", "ends_with", "parent", "children", and "title" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
