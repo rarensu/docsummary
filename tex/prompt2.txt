@@ -1,0 +1,33 @@
+**Task: Populate "node_content" and "node_summary"**
+
+In your preparation phase: 
+1: Compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label.  
+2: Pick an item that has children to serve as your test case. Print the boundaries of the item's children, which are their "starts_with" and "ends_with" fields. For example:
+{
+// test item
+"label":"section:foo"
+"children":[
+"section:foo_motivation",
+"section:foo_experiment"
+],
+"child_boundaries":[
+{
+"starts_with": "\subsection{Motivation for Foo}\label{section:foo_motivation}\n",
+"ends_with": "In the next subsection, we discuss a Foo experiment.\n"
+},
+{
+"starts_with": "\subsection{Foo Experiment}\label{section:foo_experiment}\n",
+"ends_with": "In the next section, we discuss a different topic named Bar.\n"
+},
+]
+}
+3: Verify that the intervals 
+(item["starts_with"], item["child_boundaries"][0]["starts_with"]) +
+(item["child_boundaries"][0]["ends_with"], item["child_boundaries"][1]["starts_with"]) +
+... + 
+(item["child_boundaries"][n-1]["ends_with"], item["ends_with"]) 
+correctly extracts the contents of the test item but excluding the test item's children. 
+The idea is to skip over the content of the child elements. This is defined to be the "node_content" for the test item. 
+4. Summarize "node_content" for your test item, briefly, omitting redundant statements and references to other elements. This is defined to be "node_summary". 
+
+In your response, output an updated data structure that includes "node_content" and "node summary" fields for all items in the "tree" array. 
