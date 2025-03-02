@@ -1,4 +1,5 @@
 **Task: Populate 'tree_summary' (Recursive Walk)**
+This prompt corresponds to Step 4 of the multi-step workflow described in the system prompt.
 
 In your preparation phase, 
 1: Compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label.  
