@@ -1,4 +1,4 @@
-**Task: Populate "node_content" and "title"**
+**Task: Populate "node_summary" and "title"**
 This prompt corresponds to Step 3 of the multi-step workflow described in the system prompt. The "node_content" field should have been populated. It is expected that "starts_with" and "ends with" have been omitted, as they are no longer needed. 
 
 In your preparation phase: 
