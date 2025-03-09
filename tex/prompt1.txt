@@ -1,4 +1,4 @@
-**Task: Populate "starts_with", "ends_with", and "title"**
+**Task: Populate "starts_with", "ends_with", and "node_content"**
 This prompt corresponds to Step 2 of the multi-step workflow described in the system prompt.
 
 In your preparation phase:
@@ -29,6 +29,5 @@ In your preparation phase:
 - If uniqueness is difficult: you may need to include more surrounding text in your "starts_with" and "ends_with" strings to ensure uniqueness within the chunk. It is OK if the strings slightly overlap with neighboring elements or parent elements. They only need to approximately mark the position of the element.
 - Strive to keep the strings as short as possible while maintaining uniqueness and accuracy.
 
-This paragraph clarifies the "title" field. Some latex document elements have an obvious title. For example, \section{title}. For latex elements that have a \caption, pick a fragment of the first sentence from the caption, but exclude any boilerplate (This figure shows). For example, "A diagram of a device with a sensor." For other elements, just pick a few words from near the start of the element, but exclude any boilerplate (In this paragraph, we). For example, "describe the components of the device." The title field is just a convenience, and does not need to be supremely accurate. It's OK to paraphrase or otherwise use judgement to make the title look cleaner.
 
-In your response, output an updated data structure that includes "starts_with", "ends_with", and "title" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate.
+In your response, output an updated data structure that includes "starts_with", "ends_with", and "node_content" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "parent", and "children" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate.
