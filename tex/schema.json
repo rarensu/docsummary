@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://raw.githubusercontent.com/rarensu/docsummary/v1.2/tex/schema.json",
-    "title": "Richard's custom document summary schema (v1.2)",
+    "$id": "https://raw.githubusercontent.com/rarensu/docsummary/v1.3/tex/schema.json",
+    "title": "Richard's custom document summary schema (v1.3)",
     "description": "JSON schema for organizing summaries of a long latex document with a hierarchical structure.",
     "type": "object",
     "properties": {
@@ -78,6 +78,13 @@
                     "node_summary": {
                         "type": "string",
                         "description": "A brief summary of the document element, not including its children."
+                    },
+                    "child_summaries": {
+                        "type": "array",
+                        "description": "An array of summaries of child document elements.",
+                        "items": {
+                            "type": "string"
+                        }
                     },
                     "tree_summary": {
                         "type": "string",
