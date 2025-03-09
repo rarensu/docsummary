@@ -1,38 +1,11 @@
-**Task: Populate "node_content" and "node_summary"**
-This prompt corresponds to Step 3 of the multi-step workflow described in the system prompt.
+**Task: Populate "node_content" and "title"**
+This prompt corresponds to Step 3 of the multi-step workflow described in the system prompt. The "node_content" field should have been populated. It is expected that "starts_with" and "ends with" have been omitted, as they are no longer needed. 
 
 In your preparation phase: 
 1: Compare inputXY.json and chunkXY.txt (or whatever their actual names are) to verify that they contain at least one matching label.  
-2: Pick an item that has children to serve as your test case. Print the boundaries of the item's children, which are their "starts_with" and "ends_with" fields. For example:
-{
-// test item
-"label":"section:foo"
-"children":[
-"section:foo_motivation",
-"section:foo_experiment"
-],
-"child_boundaries":[
-{
-"starts_with": "\subsection{Motivation for Foo}\label{section:foo_motivation}\n",
-"ends_with": "In the next subsection, we discuss a Foo experiment.\n"
-},
-{
-"starts_with": "\subsection{Foo Experiment}\label{section:foo_experiment}\n",
-"ends_with": "In the next section, we discuss a different topic named Bar.\n"
-},
-]
-}
-3: The idea is to extract the document element's content while skipping over the content of the child elements. This is defined to be the "node_content" for the test item. Verify that the concatenation of the intervals described below correctly extracts the "node_content" of the test item and excludes the test item's children. To clarify, since the "starts_with" and "ends_with" strings only *approximately* mark the positions of of a child element, you will have to use judgement about which characters from the string to include/exclude from "node_content". If the formula described below doesn't work for you, you might choose to define a new formula. 
-// interval before first child
-(item["starts_with"], item["child_boundaries"][0]["starts_with"]) +
-// interval between first and second child
-(item["child_boundaries"][0]["ends_with"], item["child_boundaries"][1]["starts_with"]) +
-// intervals between other children
-... + 
-// interval after last child
-(item["child_boundaries"][n-1]["ends_with"], item["ends_with"]) 
+2: Pick an item that has children to serve as your test case. 
+3. Summarize "node_content" for your test item, briefly, omitting redundant statements and references to other elements. This is defined to be "node_summary". 
 
-Also in your preparation phase: 
-4. Summarize "node_content" for your test item, briefly, omitting redundant statements and references to other elements. This is defined to be "node_summary". 
+This paragraph clarifies the "title" field. Some latex document elements have an obvious title. For example, \section{title}. For latex elements that have a \caption, pick a fragment of the first sentence from the caption, but exclude any boilerplate (This figure shows). For example, "A diagram of a device with a sensor." For other elements, just pick a few words from near the start of the element, but exclude any boilerplate (In this paragraph, we). For example, "describe the components of the device." The title field is just a convenience, and does not need to be supremely accurate. It's OK to paraphrase or otherwise use judgement to make the title look cleaner.
 
-In your response, output an updated data structure that includes "node_content" and "node summary" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "start_with", "ends_with", "parent", "children", and "title" from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
+In your response, output an updated data structure that includes "title" and "node_summary" fields for all items in the "tree" array. Copy "filename", "prefix", "label", "start_with", "ends_with", "parent", "children", and "node_content" (if present) from the input inputXY.json. Write new values for "response", "comment", and "status", as appropriate. 
