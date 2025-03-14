@@ -1,0 +1,57 @@
+**Task: Populate "keywords"**
+This prompt corresponds to Step 8 of the multi-step workflow described in the system prompt. You will find a file named like inputXY.json. The "node_content", and "tree_summary" fields should have been populated. The "keywords" field and the "suggested_keywords" field from the previous steps should be populated. It is expected that "starts with", "ends with", "node_summary" and "child_summaries" will have been omitted, since they are no longer needed.  
+
+This paragraph clarifies the values of the "keyword" field. A keyword can be a single word or acronym ("CDMS"), or a short phrase of 2-3 words ("superconducting quasiparticle"). All keywords should be selected from the approved list, provided in a file named like approved_keywords.txt. It is my intention that a keyword applied to a document element be defined or significantly clarified within the "node_content", "title", "node_summary", and/or the "tree_summary" of that document element. It's OK if a parent inherits some keywords from its children, but just the important ones; I don't want the top-level document element to end up with 20+ keywords. Later, the keywords will be used to populate an index to help a reader who wishes to learn more about a keyword find specific relevant document elements. Thus, you might consider "would a reader find this document element enlightening if they were curious about <keyword>?" to be a basic intuitive criterion for deciding whether to apply a potential keyword to a document element. 
+
+Your main task is to replace each item from each input "keyword" field (populated by a previous AI agent that lacked access to the approved keywords list) with a semantically similar keyword from the approved keywords list, when possible and appropriate. It is expected that some input keywords will not have a close match on the approved list, or have been incorrectly applied to the element; in those chases, the keyword should be dropped. When you do, note that in the "comment" field for that document element, e.g., "dropped <keyword> because no appropriate close match found." For your convenience, a list of "suggested_keywords" have been provided for each document element based on a very simplistic semantic similarity search, tuned to produce excess false positives and few false negatives. Thus, it is likely that the correct keywords you need is somewhere among the suggested keywords, but it is also likely that the majority of the suggested keywords are just irrelevant. Since "suggested_keywords" is both shorter and closer in context than "approved keywords", you should prefer to pick a match from among "suggested_keywords"; the purpose of this is to reduce the rate of hallucinations. If you are confident that you can pick a better keyword from the approved list, even though it didn't appear on the suggested list, you may do so. When you do, you should make a note of that in the "comment" field of the document element, e.g., "picked approved keyword <keyword> from outside of suggested_keywords."
+
+In your preparation phase, consider this example input and output pair for a single document element. Attempt to analyse the input according to your understanding of the task and verify your resulting output would be similar to the example output. Observe that the result is case-sensitive (Junction vs junction). 
+Example Input:
+  {
+    "prefix": "Equation",
+    "label": "eqn:jj_inductor",
+    "parent": "section:more-transmon",
+    "title": "Josephson Junction Inductor Energy Equation",
+    "node_content": "\begin{equation}\label{eqn:jj_inductor}\nE_{J}=L_JI^{2},\n\end{equation}",
+    "tree_summary": "Equation defining the electrical potential energy stored in a Josephson Junction, $E_J = L_J I^2$, where I is electron current and $L_J$ is Josephson inductance.",
+    "keywords": [
+      "Josephson Junction",
+      "inductor energy",
+      "Josephson inductance"
+    ],
+    "suggested_keywords": [
+      "Cooper pairs",
+      "peak power",
+      "superconducting transition",
+      "tungsten wire",
+      "electronic band structure",
+      "phonon-superconductor interaction",
+      "anharmonic oscillator",
+      "Fermi energy",
+      "Josephson inductance",
+      "electronic energy transport",
+      "phonoelectric effect",
+      "phonon scattering",
+      "phonon energy spectrum",
+      "Josephson junction",
+      "bias voltage",
+      "long-range phonon propagation",
+      "charge propagation"
+    ]
+  }
+Example output:
+  {
+    "prefix": "Equation",
+    "label": "eqn:jj_inductor",
+    "parent": "section:more-transmon",
+    "title": "Josephson Junction Inductor Energy Equation",
+    "tree_summary": "Equation defining the electrical potential energy stored in a Josephson Junction, $E_J = L_J I^2$, where I is electron current and $L_J$ is Josephson inductance.",
+    "keywords": [
+      "Josephson junction",
+      "Josephson inductance",
+      "charge propagation"
+    ],
+    "comment": "dropped inductor energy because no close match. added charge propagation because it is related to electron current."
+  }
+
+In your response, output an updated data structure that includes a "keyword" field for each item. Copy "filename", "prefix", "label", "parent", "children", "title", and "tree_summary" (if present) from the input inputXY.json. Drop "suggested_keywords" and "node_content" fields (they are no longer needed). Write new values for "response", "comment", and "status", as appropriate. 
