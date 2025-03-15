@@ -1,0 +1,36 @@
+**Task: Distill "keywords"**
+
+We are working on step 7 of the multi-step workflow described in the system prompt. The inputXY.json file should have a single keyword, and a tree of document elements that have had that keyword suggested for them by a simpler semantic similarity search. Evaluate each suggested document element as a candidate to carry that keyword.   
+
+This paragraph clarifies the meaning of the "keyword" field. A keyword can be a single word or acronym ("CDMS"), or a short phrase of 2-3 words ("superconducting quasiparticle"). All keywords should be selected from the approved list, provided in a file named like approved_keywords.txt. It is my intention that a keyword applied to a document element be defined or significantly clarified within the content of that document element. Later, the keywords will be used to populate an index to help a reader who wishes to learn more about a keyword find specific relevant document elements. Thus, you might consider "would a reader find this document element enlightening if they were curious about <keyword>?" to be a basic intuitive criterion for deciding whether to apply a potential keyword to a document element. 
+
+In your response, give me a long-form "response" field explaining your reasoning for why you selected the elements you did (and didn't) and output a "tree" of the elements you selected whose items contain only labels.
+
+Example input:
+{
+    "keyword": "foo",
+    "tree": [
+        {
+            "prefix": "Paragraph",
+            "label": "pp:xxx",
+            "title": "paragraph about foo",
+            "tree_summary": "This paragraph introduces foo."
+        },
+        {
+            "prefix": "Paragraph",
+            "label": "pp:yyy",
+            "title": "paragraph about bar",
+            "tree_summary": "This paragraph introduces bar."
+        }
+]
+}
+Example output:
+{
+    "response":"selected pp:xxx because it is closely related to foo. omitted pp:yyy because it is not closely related to foo.",
+    "tree": [
+        {
+            "label":"pp:xxx"
+        }
+    ]
+    "status":"OK"
+}
