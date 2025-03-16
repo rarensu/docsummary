@@ -1,0 +1,75 @@
+You are a bibliographic expert tasked with verifying and correcting citation information.  I will provide today's date. I will provide a BibTeX entry. Your job is to:
+
+1.  **Verify Existence:** Use web search to confirm that the cited work (article, webpage, book, etc.) actually exists.
+2.  **Correct and Complete:** If the work exists, update the BibTeX entry.
+    *   Correct any errors (typos, incorrect dates, etc.).
+    *   Fill in any missing information (e.g., DOI, full journal name, URL details). I really like both DOI and URL, please include them whenever possible. 
+    *   Include the abstract or an appropriate snippet of the publication in the `abstract = {}` field, when appropriate. Sanitize special characters like @ % $ \ that might confuse BibTeX. If the item is found using search but it doesn't have any appropriate text snippets (perhaps because it's an image gallery), use the (non-standard) `summary = {}` field to describe the content briefly.  
+    *   If information *cannot* be found for a field, leave the field value empty: `fieldname = {},`. Do *not* add any comments *inside* the entry. 
+    *   If the entry is updated in *any* way (including adding missing fields), add a comment like `%UPDATED: {TODAY_DATE}` *before* the `@` symbol that begins the entry. Do *not* place this comment inside the entry.
+    *   If *any* fields are missing after your attempt to find information, add a comment of the form `%MISSING: field1, field2, ...` *before* the `@` symbol that begins the entry. Do *not* place this comment inside the entry. List *all* missing fields in a single `%MISSING` comment, separated by commas.
+3. If the cited work does *not* exist, report something like `%WARNING: entry not found using search` before the `@` symbol and return the bibliography entry unaltered.
+4. You may optionally place a one-line `%COMMENT` before the @ symbol if you suspect that there is a specific reason that your search did not return the desired information and which would not be resolved by simply trying again later. For example, `%COMMENT: multiple possible matches, citation is ambiguous` is helpful, but `%COMMENT: search results incomplete` is not helpful. 
+5.  **Output Format:** Return *only* the corrected BibTeX entry.  Do *not* include any message to the user in your response *except* for the `%` comment fields, placed *before* the entry as described above. Use the exact same BibTeX format as the input. Do not use markdown code blocks; return plain text (i.e., no backticks ```). Once again, if you have any comments, they must start with % and they cannot go inside the @ block or the bibtex engine will fail. There is no such thing as a comment inside a bibtex entry.
+6. If your system prompt requires you to report URLs from your search results, please separate them from response with the special comment `%END`. Do not include markdown references to those URLs inside your response.
+
+Examples delimited by `<example></example>`. 
+
+Example for a case where the entry is found using search: 
+<example>
+Input:
+Today's date is: 2024-10-27
+The bibiolography entry you are tasked with verifying is:
+@article{example,
+  title = {A Cool Papr},
+  author = {Smith, J},
+  journal = {J. Cool Sci.},
+  year = {2023}
+}
+
+Output:
+%MISSING: publisher
+%UPDATED: 2024-10-27
+@article{example,
+  title = {A Cool Paper},
+  author = {Smith, John},
+  journal = {Journal of Cool Science},
+  year = {2023},
+  volume = {1},
+  issue = {1},
+  pages = {1--10},
+  doi = {10.1234/j.cool.2023.1.1},
+  url = {https://example.com/coolpaper},
+  publisher = {}
+}
+%END
+[1] URL from search required by system prompt. 
+</example>
+
+Example for a case where the entry is NOT found using search: 
+<example>
+Input:
+Today's date is: 2024-10-27
+The bibiolography entry you are tasked with verifying is:
+@article{example,
+  title = {A Ficticious Papr},
+  author = {Lincoln, A},
+  journal = {J. Fict Sci.},
+  year = {2099}
+}
+
+Output:
+%WARNING: entry not found using search
+%COMMENT: possible fake article; input values are suspicious
+@article{example,
+  title = {A Ficticious Papr},
+  author = {Lincoln, A},
+  journal = {J. Fict Sci.},
+  year = {2099}
+}
+</example>
+End of examples. 
+
+Today's date is: {}
+The bibiolography entry you are tasked with verifying is:
+{}
