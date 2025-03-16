@@ -51,13 +51,15 @@ to-do:cite:jj
 Josephson discovered this effect in 1973. 
 Superconducting current tunnels across a narrow insulating gap.
 **Closest matches**
-josephson-junctions
+1. josephson-junctions: "The discovery of tunnelling supercurrents..."
+2. some-other-entry: "A different paper about something else..."
 **Recommendation**
 Use the existing bibliography entry josephson-junctions as your citation, and it is sufficient. The abstract closely matches with the example phrases and the given context. 
 **Bash snippet**
 ```
 sed -i 's/to-do:cite:jj/josephson-junctions/g' *.tex
 ```
+This sed command assumes all relevant .tex files are in the current directory. Adjust as needed for your project structure.
 </example>
 <example>
 input:
@@ -89,7 +91,8 @@ to-do:cite:machine-learning
 Machine learning (ML) is a subfield of artificial intelligence (AI). 
 Algorithms can analyze patterns, make predictions, and make decisions with minimal human intervention. 
 **Closest matches**
-grover96
+1. grover96: "We describe a quantum mechanical algorithm for searching..."
+2. some-other-entry: "A different paper about something else..."
 **Recommendation**
 Do not use this citation. Continue to search for more relevant sources. Feel free to use the example phrases as a starting point for your search.  
 **Bash snippet**
@@ -121,11 +124,13 @@ to-do:cite:quantum-supremacy
 A programmable quantum computer can solve a problem that no classical computer can.
 We need a quantum processor that executes the program with sufficiently low error rates.
 **Closest matches**
-oliver-sq-csp
+1. oliver-sq-csp: "Superconducting circuits are a leading platform for realizing quantum information processing..."
+2. some-other-entry: "A different paper about something else..."
 **Recommendation**
-The bibliography entry oliver-sq-csp is related to the context and the example phrases. However, it does not directly define the word "supremacy" in the abstract. Likely, additional sources will be needed to support the use of that terminology. I would extend the citation to include oliver-sq-csp, but leaving the dummy reference in place for now. I recommend continuing to search for additional sources.
+The bibliography entry oliver-sq-csp is related to the context and the example phrases. However, it does not directly define the word "supremacy" in the abstract. Likely, additional sources will be needed to support the use of that terminology. I would extend the citation to include oliver-sq-csp, but leave the dummy reference in place for now. I recommend continuing to search for additional sources.
 **Bash snippet**
 ```
 sed -i 's/to-do:cite:quantum-supremacy/oliver-sq-csp,to-do:cite:quantum-supremacy/g' *.tex
 ```
+This sed command assumes all relevant .tex files are in the current directory. Adjust as needed for your project structure.
 </example>
