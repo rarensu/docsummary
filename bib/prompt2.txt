@@ -4,20 +4,20 @@ Step 1. Find the contents of "inputXY.json" (or however it is named). It should 
 
 Step 2. Imagine the best possible hypothetical citation: an article which contains the required information to justify the claim or term I wish to present. Write a few example phrases that might appear in the abstract of such an article. 
 
-Step 3. Find the contents of my bibliography "myReferences.bib". Search for entries with an abstract (or other metadata) that is closely related to the claim I wish to justify. Pick the top two closest matches. 
+Step 3. Find the contents of my bibliography "myReferences.bib". Search for sources with an abstract (or other metadata) that is closely related to the claim I wish to justify. Pick the top two closest matches. 
 
 Step 4. Decide if either of the closest match bibliography entries you identified is likely to contain the required information to justify my claim, such that you would be confident in using it as the citation for that claim. Options include: 
-- "do not use this citation; continue to search for alternative sources."
-- "this citation is plausible, but you need to scan the source material for specific details to confirm."
-- "use this citation, and it is sufficient."
-- "use this citation, but it is not sufficient; continue to search for additional sources."
+- "do not use this source; continue to search for alternative sources."
+- "this source is plausible, but you need to scan the source material for specific details to confirm."
+- "use this source, and it is sufficient."
+- "use this source, but it is not sufficient; continue to search for additional sources."
 
 Step 5. If appropriate, construct a short bash snippet to replace the dummy citation reference with a correct combination of real and/or dummy references.
 
 In your response, report these five items:
 - the target_reference.
-- the example sentences from your hypothetical best-case scenario abstract.
-- the closest matching bibliography entries. 
+- the example phrases from your hypothetical best-case scenario abstract.
+- the two closest matching sources from among my bibliography entries. 
 - your recommendation as to whether one or more of them should be used, and/or if I need to search for something more to add to my bibliography. 
 - a bash snippet to help me with the task. 
 
@@ -54,7 +54,7 @@ Superconducting current tunnels across a narrow insulating gap.
 1. josephson-junctions: "The discovery of tunnelling supercurrents..."
 2. some-other-entry: "A different paper about something else..."
 **Recommendation**
-Use the bibliography entry josephson-junctions for this citation, and it is sufficient. The abstract closely matches with the example phrases and the given context. The next closest match some-other-entry is not needed.
+Use the bibliography entry josephson-junctions as a source for this citation, and it is sufficient. The abstract closely matches with the example phrases and the given context. The next closest match some-other-entry is not needed.
 **Bash snippet**
 ```
 sed -i 's/to-do:cite:jj/josephson-junctions/g' *.tex
@@ -94,7 +94,7 @@ Algorithms can analyze patterns, make predictions, and make decisions with minim
 1. grover96: "We describe a quantum mechanical algorithm for searching..."
 2. some-other-entry: "A different paper about something else..."
 **Recommendation**
-Neither grover96 nor some-other-entry is appropriate for this citation. Continue to search for more relevant sources. Feel free to use the example phrases as a starting point for your search.  
+Neither grover96 nor some-other-entry is appropriate as a source for this citation. Continue to search for more relevant sources. Feel free to use the example phrases as a starting point for your search.  
 **Bash snippet**
 None
 </example>
@@ -127,7 +127,7 @@ We need a quantum processor that executes the program with sufficiently low erro
 1. oliver-sq-csp: "Superconducting circuits are a leading platform for realizing quantum information processing..."
 2. some-other-entry: "A different paper about something else..."
 **Recommendation**
-The bibliography entry oliver-sq-csp is related to the context and the example phrases. However, it does not directly define the word "supremacy" in the abstract. Likely, additional sources will be needed to support the use of that terminology. I would extend the citation to include oliver-sq-csp, but leave the dummy reference in place for now. The next closest match some-other-entry is not helpful. I recommend continuing to search for additional sources.
+The metadata for bibliography entry oliver-sq-csp is related to the context and the example phrases. However, it does not directly define the word "supremacy" in the abstract. Likely, additional sources will be needed to support the use of that terminology. I would extend the citation to include oliver-sq-csp as a source, but leave the dummy reference in place for now as a placeholder for additional sources. The next closest match some-other-entry is not helpful. I recommend continuing to search for additional sources. Feel free to use the example phrases as a starting point for your search.  
 **Bash snippet**
 ```
 sed -i 's/to-do:cite:quantum-supremacy/oliver-sq-csp,to-do:cite:quantum-supremacy/g' *.tex
