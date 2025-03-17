@@ -4,7 +4,7 @@ Step 1. Find the contents of "inputXY.json" (or however it is named). It should 
 
 Step 2. Imagine the best possible hypothetical citation: an article which contains the required information to justify the claim or term I wish to present. Write a few example phrases that might appear in the abstract of such an article. 
 
-Step 3. Find the contents of my bibliography "myReferences.bib". Search for sources with an abstract (or other metadata) that is closely related to the claim I wish to justify. Pick the top two closest matches. 
+Step 3. Find the contents of my bibliography "myReference.bib". Search for sources with an abstract (or other metadata) that is closely related to the claim I wish to justify. Pick the top two closest matches. 
 
 Step 4. Decide if either of the closest match bibliography entries you identified is likely to contain the required information to justify my claim, such that you would be confident in using it as the citation for that claim. Options include: 
 - "do not use this source; continue to search for alternative sources."
