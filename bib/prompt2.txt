@@ -12,7 +12,7 @@ Step 4. Decide if either of the closest match bibliography entries you identifie
 - "use this source, and it is sufficient."
 - "use this source, but it is not sufficient; continue to search for additional sources."
 
-In your response, report these five items:
+In your response, report these four items:
 - the target_reference.
 - the example phrases from your hypothetical best-case scenario abstract.
 - the two closest matching sources from among my bibliography entries. 
